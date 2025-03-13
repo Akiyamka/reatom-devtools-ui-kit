@@ -1,0 +1,99 @@
+:root {
+  --contrast: 10;
+  --background: hsla(0, 0%, 5%, 1);
+  --text: hsla(0, 100%, 100%, 0.87);
+  --level-0: hsla(0, 0%, 50%, 0.01);
+  --level-1: hsla(0, 0%, 50%, calc(1 * var(--contrast) / 100));
+  --level-2: hsla(0, 0%, 50%, calc(2 * var(--contrast) / 100));
+  --level-3: hsla(0, 0%, 50%, calc(3 * var(--contrast) / 100));
+  --level-4: hsla(0, 0%, 50%, calc(4 * var(--contrast) / 100));
+  --level-5: hsla(0, 0%, 50%, calc(5 * var(--contrast) / 100));
+  --level-6: hsla(0, 0%, 50%, calc(6 * var(--contrast) / 100));
+  --level-7: hsla(0, 0%, 50%, calc(7 * var(--contrast) / 100));
+  --level-8: hsla(0, 0%, 50%, calc(8 * var(--contrast) / 100));
+  --level-9: hsla(0, 0%, 50%, calc(9 * var(--contrast) / 100));
+  --level-10: hsla(0, 0%, 50%, calc(10 * var(--contrast) / 100));
+  --level-15: hsla(0, 0%, 50%, calc(15 * var(--contrast) / 100));
+  --level-20: hsla(0, 0%, 50%, calc(20 * var(--contrast) / 100));
+  --level-25: hsla(0, 0%, 50%, calc(25 * var(--contrast) / 100));
+  --level-30: hsla(0, 0%, 50%, calc(30 * var(--contrast) / 100));
+  --foreground: white;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: white;
+    --text: hsla(0, 0%, 0%, 0.87);
+    --foreground: black;
+  }
+  a:hover {
+    color: #747bff;
+  }
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: black;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: 14px;
+  color: var(--text);
+  background-color: var(--background);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  border: none;
+}
+button:hover {
+  background-color: var(--level-2);
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+}
+
+code {
+  white-space: pre;
+  font-size: 0.8em;
+}
