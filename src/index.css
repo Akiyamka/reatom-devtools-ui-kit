@@ -1,6 +1,6 @@
 :root {
   --contrast: 10;
-  --background: hsla(0, 0%, 5%, 1);
+  --background: hsla(0, 0%, 0%, 1);
   --text: hsla(0, 100%, 100%, 0.87);
   --level-0: hsla(0, 0%, 50%, 0.01);
   --level-1: hsla(0, 0%, 50%, calc(1 * var(--contrast) / 100));
@@ -96,4 +96,13 @@ li {
 code {
   white-space: pre;
   font-size: 0.8em;
+}
+
+@keyframes flashing {
+  from {
+    opacity: 1
+  }
+  to {
+    opacity: 0.3
+  }
 }

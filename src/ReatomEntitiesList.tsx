@@ -2,8 +2,8 @@ import { css } from 'vite-css-in-js';
 import { entities } from './entities';
 import { Virtuoso } from 'react-virtuoso';
 import { ReatomLogEvent } from './ui/kit/ReatomLogEvent';
-import { memo } from 'preact/compat';
 import { Stack } from './ui/kit/Stack';
+import { Code } from './ui/kit/Code';
 
 const stl = {
   listRoot: css`
@@ -13,13 +13,10 @@ const stl = {
   `,
 };
 
-const Code = memo(function Code({ code }: { code: unknown }) {
-  return <code>{JSON.stringify(code, null, 2)}</code>;
-});
-
 const actions = [{ label: 'Log to console', onClick: () => console.log('Action clicked') }];
 export function ReatomEntitiesList() {
   const items = entities.$filtered.value;
+  const current = entities.$current.value;
   return (
     <div class={stl.listRoot}>
       <Virtuoso
@@ -32,10 +29,11 @@ export function ReatomEntitiesList() {
               <Stack i={i} title={'8:31:09 PM [607ms]'}>
                 {item.map((itm) => (
                   <ReatomLogEvent
+                    onClick={() => entities.select(itm)}
                     key={itm.name}
                     name={itm.name}
                     type={itm.type}
-                    selected={false}
+                    selected={current === itm}
                     actions={actions}
                     content={<Code code={itm.payload} />}
                   />
@@ -45,10 +43,11 @@ export function ReatomEntitiesList() {
           }
           return (
             <ReatomLogEvent
+              onClick={() => entities.select(item)}
               key={item.name}
               name={item.name}
               type={item.type}
-              selected={false}
+              selected={current === item}
               actions={actions}
               content={<Code code={item.payload} />}
             />

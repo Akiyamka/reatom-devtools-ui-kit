@@ -33,3 +33,5 @@ export const entities = {
 };
 
 export type { ReatomLogRecord } from './types';
+
+export const $recording = signal(true);

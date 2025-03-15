@@ -24,7 +24,7 @@ const stl = {
       visibility: visible;
     }
     &[data-active='true'] {
-      outline: 1px solid var(--level-3);
+      outline: 1px solid var(--level-8);
     }
     & > * {
       width: 100%;
@@ -81,7 +81,7 @@ export function ReatomLogEvent({
         <div class={stl.recordName} title={name}>
           {name}
         </div>
-        {actions?.length && <Dropdown actions={actions} />}
+        {actions?.length ? <Dropdown actions={actions} /> : null}
       </div>
       {content ? <div class={stl.content}>{content}</div> : null}
     </div>

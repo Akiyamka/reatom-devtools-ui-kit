@@ -1,5 +1,5 @@
 import { css } from 'vite-css-in-js';
-import { entities } from './entities';
+import { RegexpIcon } from '../Icons/RegexpIcon';
 
 const stl = {
   search: css`
@@ -28,16 +28,16 @@ const stl = {
  `,
 };
 
-export function Search() {
+export function Search({ onInput }: { onInput: (value: string) => void }) {
   return (
     <div class={stl.search}>
-      {/* <img class={stl.icon} src="./logo.svg"></img> */}
       <input
         class={stl.input}
         type="search"
-        placeholder="Search"
-        onInput={(e) => entities.setFilter(e.currentTarget.value)}
+        placeholder="Filter events"
+        onInput={(e) => onInput(e.currentTarget.value)}
       />
+      <button><RegexpIcon/></button>
     </div>
   );
 }
