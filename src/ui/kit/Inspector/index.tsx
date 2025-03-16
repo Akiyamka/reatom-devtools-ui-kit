@@ -4,6 +4,7 @@ import { Section } from './Section';
 import { Code } from '../Code';
 import { TraceRow } from './TraceRow';
 import type { ReatomLogRecord } from '../../../entities';
+import { Resizable } from '../Resizable';
 
 const stl = {
   inspector: css`
@@ -47,9 +48,11 @@ export function Inspector({ record }: { record: ReatomLogRecord | null }) {
           <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
         </TraceRow>
       </Section>
-      <Section title={'State'}>
-        <Code code={record.payload} />
-      </Section>
+      <Resizable direction='top'>
+        <Section title={'State'}>
+          <Code code={record.payload} />
+        </Section>
+      </Resizable>
       <Section title={'Changes history'}>
         <Code code={record.payload} />
         <Code code={record.payload} />
