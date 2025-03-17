@@ -4,7 +4,7 @@ import { Section } from './Section';
 import { Code } from '../Code';
 import { TraceRow } from './TraceRow';
 import type { ReatomLogRecord } from '../../../entities';
-import { Resizable } from '../Resizable';
+import { VerticalSections } from '../VerticalSections';
 
 const stl = {
   inspector: css`
@@ -27,37 +27,37 @@ export function Inspector({ record }: { record: ReatomLogRecord | null }) {
   }
   return (
     <div class={stl.inspector}>
-      <Section title={'Trace'}>
-        <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        <TraceRow>
+      <VerticalSections>
+        <Section title={'Trace'}>
           <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        </TraceRow>
-        <TraceRow>
-          <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        </TraceRow>
-        <TraceRow>
-          <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        </TraceRow>
-        <TraceRow>
-          <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        </TraceRow>
-        <TraceRow>
-          <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        </TraceRow>
-        <TraceRow>
-          <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
-        </TraceRow>
-      </Section>
-      <Resizable direction='top'>
+          <TraceRow>
+            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          </TraceRow>
+          <TraceRow>
+            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          </TraceRow>
+          <TraceRow>
+            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          </TraceRow>
+          <TraceRow>
+            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          </TraceRow>
+          <TraceRow>
+            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          </TraceRow>
+          <TraceRow>
+            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          </TraceRow>
+        </Section>
         <Section title={'State'}>
           <Code code={record.payload} />
         </Section>
-      </Resizable>
-      <Section title={'Changes history'}>
-        <Code code={record.payload} />
-        <Code code={record.payload} />
-        <Code code={record.payload} />
-      </Section>
+        <Section title="Changes history">
+          <Code code={record.payload} />
+          <Code code={record.payload} />
+          <Code code={record.payload} />
+        </Section>
+      </VerticalSections>
     </div>
   );
 }

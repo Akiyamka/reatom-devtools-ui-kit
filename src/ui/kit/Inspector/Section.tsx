@@ -2,16 +2,13 @@ import { css } from 'vite-css-in-js';
 import type { JSX } from 'preact/jsx-runtime';
 
 const stl = {
-  inspector: css`
-    display: flex;
-    flex-flow: column nowrap;
-    width: 100%;
-    border-left: 1px solid var(--level-4);
-  `,
   section: css`
     display: flex;
     flex-flow: column nowrap;
     min-height: 0;
+    &[data-greedy='true'] {
+      flex: 1;
+    }
   `,
   sectionTitle: css`
     padding: 4px 8px;
@@ -23,11 +20,27 @@ const stl = {
   `,
 };
 
-export function Section({ children, title }: { children: JSX.Element[] | JSX.Element; title: string }) {
+export const SectionTitle = ({ children }: { children: string | JSX.Element[] | JSX.Element }) => (
+  <div class={stl.sectionTitle}>{children}</div>
+);
+
+export const SectionContent = ({ children }: { children: JSX.Element[] | JSX.Element }) => (
+  <div class={stl.sectionContent}>{children}</div>
+);
+
+export function Section({
+  children,
+  title,
+  greedy = false,
+}: {
+  children: JSX.Element[] | JSX.Element;
+  title: string;
+  greedy?: boolean;
+}) {
   return (
-    <div class={stl.section}>
-      <div class={stl.sectionTitle}>{title}</div>
-      <div class={stl.sectionContent}>{children}</div>
+    <div class={stl.section} data-greedy={greedy}>
+      <SectionTitle>{title}</SectionTitle>
+      <SectionContent>{children}</SectionContent>
     </div>
   );
 }

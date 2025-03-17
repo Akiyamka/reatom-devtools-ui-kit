@@ -1,4 +1,4 @@
-import { ComponentChild } from 'preact';
+import { ComponentChild, type JSX } from 'preact';
 import { useLayoutEffect, useRef } from 'preact/hooks';
 
 import { css } from 'vite-css-in-js';
@@ -61,10 +61,18 @@ function onDragStart(
 ) {
   return (event: MouseEvent) => {
     const initialX = event.clientX;
-    const initialWith = parseInt(el.current?.style.getPropertyValue('--resizable-value') ?? '0');
+    const initialY = event.clientY;
+    const initialValue = parseInt(el.current?.style.getPropertyValue('--resizable-value') || '0');
     const onMouseMove = (e: MouseEvent) => {
-      const shift = settings.direction === 'right' ? e.clientX - initialX : initialX - e.clientX;
-      const result = initialWith + shift;
+      let shift = 0;
+      if (settings.direction === 'right') {
+        shift = e.clientX - initialX;
+      } else if (settings.direction === 'left') {
+        shift = initialX - e.clientX;
+      } else if (settings.direction === 'top') {
+        shift = initialY - e.clientY;
+      }
+      const result = initialValue + shift;
       el.current?.style.setProperty('--resizable-value', `${result}px`);
       if (settings.collapseThreshold && settings.onCollapse && result < settings.collapseThreshold) {
         settings.onCollapse();
@@ -84,36 +92,40 @@ function onDragStart(
 type ResizableProps =
   | {
       children: ComponentChild;
-      defaultWith?: number;
+      defaultValue?: number;
       direction: Direction;
     }
   | {
       children: ComponentChild;
-      defaultWith?: number;
+      defaultValue?: number;
       direction: Direction;
       onCollapse: () => void;
       collapseThreshold: number;
     };
 
-export function Resizable({ children, defaultWith, direction, ...rest }: ResizableProps) {
+export function Resizable({ children, defaultValue, direction, ...rest }: ResizableProps) {
   const rootElRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    if (!defaultWith) return;
+    if (!defaultValue) return;
     if ('collapseThreshold' in rest) {
-      if (defaultWith > rest.collapseThreshold) {
-        rootElRef.current?.style.setProperty('--resizable-value', `${defaultWith}px`);
+      if (defaultValue > rest.collapseThreshold) {
+        rootElRef.current?.style.setProperty('--resizable-value', `${defaultValue}px`);
       } else {
         rootElRef.current?.style.setProperty('--resizable-value', `0px`);
         rest.onCollapse?.();
       }
     } else {
-      rootElRef.current?.style.setProperty('--resizable-value', `${defaultWith}px`);
+      rootElRef.current?.style.setProperty('--resizable-value', `${defaultValue}px`);
     }
-  }, [defaultWith]);
+  }, [defaultValue]);
   return (
     <div class={stl.root} data-direction={direction} ref={rootElRef}>
       {children}
-      <div id="grip" class={`${stl.grip} ${stl[direction]}`} onMouseDown={onDragStart(rootElRef, { direction, ...rest })}></div>
+      <div
+        id="grip"
+        class={`${stl.grip} ${stl[direction]}`}
+        onMouseDown={onDragStart(rootElRef, { direction, ...rest })}
+      ></div>
     </div>
   );
 }

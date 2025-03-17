@@ -32,6 +32,8 @@ const stl = {
     width: 100%;
     height: 100%;
     background-color: var(--level-2);
+    min-height: 0px;
+    box-sizing: border-box;
   `,
 };
 
@@ -67,7 +69,7 @@ export function App() {
         </div>
         {
           entities.$current.value && (
-            <Resizable defaultWith={400} direction="left" collapseThreshold={30} onCollapse={() => entities.deselect()}>
+            <Resizable defaultValue={400} direction="left" collapseThreshold={30} onCollapse={() => entities.deselect()}>
               <Inspector record={entities.$current.value} />
             </Resizable>
           )
