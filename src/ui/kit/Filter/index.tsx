@@ -75,7 +75,7 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
     <div class={stl.filters}>
       {$searchMode.value === Mods.Easy ? (
         <div class={stl.easy}>
-          <SimpleFilter placeholder="Filter events by name or state" />
+          <SimpleFilter placeholder="Filter events by name or state" onInput={onInput} />
         </div>
       ) : (
         <div class={stl.pro}>
@@ -102,14 +102,6 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
           iconOn={<div class={stl.switch}>Easy</div> }
           iconOff={<div class={stl.switch}>Pro</div>}
         />
-
-        {/* <Toggle
-          class={stl.toggle}
-          left={Mods.Easy}
-          right={Mods.Pro}
-          value={$searchMode.value}
-          onChange={(newVal) => ($searchMode.value = newVal)}
-        /> */}
       </div>
     </div>
   );

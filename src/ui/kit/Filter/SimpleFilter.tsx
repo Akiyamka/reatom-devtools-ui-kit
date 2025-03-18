@@ -22,10 +22,15 @@ const stl = {
   `,
 };
 
-export function SimpleFilter({ placeholder }: { placeholder: string }) {
+export function SimpleFilter({ placeholder, onInput }: { placeholder: string; onInput: (value: string) => void }) {
   return (
     <div class={stl.root}>
-      <input class={stl.input} type="search" placeholder={placeholder} />
+      <input
+        class={stl.input}
+        type="search"
+        placeholder={placeholder}
+        onChange={(e) => onInput(e.currentTarget.value)}
+      />
       <button>
         <RegexpIcon />
       </button>
