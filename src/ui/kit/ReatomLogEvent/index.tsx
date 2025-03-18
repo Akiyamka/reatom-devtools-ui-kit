@@ -24,7 +24,7 @@ const stl = {
       visibility: visible;
     }
     &[data-active='true'] {
-      outline: 1px solid var(--level-8);
+      background-color: var(--level-3);
     }
     & > * {
       width: 100%;

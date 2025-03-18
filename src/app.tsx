@@ -4,13 +4,15 @@ import { ReatomEntitiesList } from './ReatomEntitiesList';
 import { $recording, entities } from './entities';
 import './app.css';
 import mock from './mocks/mockData';
-import { Search } from './ui/kit/Search';
+import { Filter } from './ui/kit/Filter';
 import { Resizable } from './ui/kit/Resizable';
 import { Header } from './ui/kit/Header';
 import { Tab } from './ui/kit/Tab';
 import { SlidersIcon } from './ui/kit/Icons/SlidersIcon';
-import { RecordSwitch } from './ui/kit/RecordSwitch';
+import { Switch } from './ui/kit/Switch';
 import { Inspector } from './ui/kit/Inspector';
+import { PauseIcon } from './ui/kit/Icons/PauseIcon';
+import { PlayIcon } from './ui/kit/Icons/PlayIcon';
 
 const stl = {
   app: css`
@@ -54,7 +56,13 @@ export function App() {
         actions={[
           <>
             <button title={'Pause'}>
-              <RecordSwitch enabled={$recording.value} onClick={() => ($recording.value = !$recording.value)} />
+              <Switch
+                enabled={$recording.value}
+                onClick={() => ($recording.value = !$recording.value)}
+                iconOn={<PauseIcon />}
+                iconOff={<PlayIcon />}
+                flashing
+              />
             </button>
             <button title={'Settings'}>
               <SlidersIcon />
@@ -64,16 +72,14 @@ export function App() {
       />
       <div class={stl.view}>
         <div class={stl.aside}>
-          <Search onInput={(value) => entities.setFilter(value)} />
+          <Filter onInput={(value) => entities.setFilter(value)} />
           <ReatomEntitiesList />
         </div>
-        {
-          entities.$current.value && (
-            <Resizable defaultValue={400} direction="left" collapseThreshold={30} onCollapse={() => entities.deselect()}>
-              <Inspector record={entities.$current.value} />
-            </Resizable>
-          )
-        }
+        {entities.$current.value && (
+          <Resizable defaultValue={400} direction="left" collapseThreshold={30} onCollapse={() => entities.deselect()}>
+            <Inspector record={entities.$current.value} />
+          </Resizable>
+        )}
       </div>
     </div>
   );

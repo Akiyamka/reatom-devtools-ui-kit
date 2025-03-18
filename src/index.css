@@ -13,10 +13,6 @@
   --level-8: hsla(0, 0%, 50%, calc(8 * var(--contrast) / 100));
   --level-9: hsla(0, 0%, 50%, calc(9 * var(--contrast) / 100));
   --level-10: hsla(0, 0%, 50%, calc(10 * var(--contrast) / 100));
-  --level-15: hsla(0, 0%, 50%, calc(15 * var(--contrast) / 100));
-  --level-20: hsla(0, 0%, 50%, calc(20 * var(--contrast) / 100));
-  --level-25: hsla(0, 0%, 50%, calc(25 * var(--contrast) / 100));
-  --level-30: hsla(0, 0%, 50%, calc(30 * var(--contrast) / 100));
   --foreground: white;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -100,9 +96,9 @@ code {
 
 @keyframes flashing {
   from {
-    opacity: 1
+    opacity: 1;
   }
   to {
-    opacity: 0.3
+    opacity: 0.3;
   }
 }

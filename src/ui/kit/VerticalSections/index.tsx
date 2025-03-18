@@ -23,7 +23,7 @@ const stl = {
   resizeHandle: css`
     width: 100%;
     height: 6px;
-    background-color: chocolate;
+    /* background-color: chocolate; */
     cursor: row-resize;
     flex-shrink: 0;
     user-select: none;
