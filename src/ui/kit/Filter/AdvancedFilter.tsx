@@ -1,13 +1,13 @@
 import { css } from 'vite-css-in-js';
-import { SimpleFilter } from './SimpleFilter';
+import type { ProFilter } from '../../../entities/filter';
+import { EqualityIcon } from '../Icons/EqualityIcon';
 import { EyeIcon } from '../Icons/EyeIcon';
-import { TrashIcon } from '../Icons/TrashIcon';
 import { FilterIcon } from '../Icons/FilterIcon';
 import { HighlighIcon } from '../Icons/HighlighIcon';
-import { EqualityIcon } from '../Icons/EqualityIcon';
 import { NotEqualityIcon } from '../Icons/NotEqualityIcon';
+import { TrashIcon } from '../Icons/TrashIcon';
 import { Switch } from '../Switch';
-import type { ProFilter } from '../../../entities/filter';
+import { SimpleFilter } from './SimpleFilter';
 
 const stl = {
   root: css`

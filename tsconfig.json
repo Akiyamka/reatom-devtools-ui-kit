@@ -10,11 +10,10 @@
       "react": ["./node_modules/preact/compat/"],
       "react-dom": ["./node_modules/preact/compat/"],
       "#entities": ["./entities"],
-      "#ui/*": ["./ui/*"]
+      "#ui/kit": ["./ui/kit/index.ts"]
     },
-
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

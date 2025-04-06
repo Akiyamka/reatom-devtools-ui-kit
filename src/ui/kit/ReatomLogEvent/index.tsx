@@ -1,9 +1,9 @@
+import type { JSX } from 'preact/jsx-runtime';
 import { css } from 'vite-css-in-js';
+import { Dropdown } from '../Dropdown';
+import type { Action } from '../Dropdown/types';
 import { LogEventTypeIcon } from './LogEventTypeIcon';
 import { ReatomLogEventType } from './types';
-import type { Action } from '../Dropdown/types';
-import { Dropdown } from '../Dropdown';
-import type { JSX } from 'preact/jsx-runtime';
 
 const stl = {
   recordRoot: css`

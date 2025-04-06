@@ -1,5 +1,5 @@
+import { type JSX, memo } from 'preact/compat';
 import { css } from 'vite-css-in-js';
-import { memo, type JSX } from 'preact/compat';
 
 const stl = {
   stack: css`

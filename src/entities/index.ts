@@ -1,6 +1,6 @@
 import { computed, signal } from '@preact/signals';
-import { ReatomLogRecord } from './types';
 import mock from './mockData';
+import { ReatomLogRecord } from './types';
 
 const $all = signal<ReatomLogRecord[][]>([[]]);
 const $current = signal<ReatomLogRecord | null>(null);

@@ -1,5 +1,5 @@
-import { css } from 'vite-css-in-js';
 import type { JSX } from 'preact/jsx-runtime';
+import { css } from 'vite-css-in-js';
 import { ArrowUpIcon } from '../Icons/ArrowUpIcon';
 
 const stl = {

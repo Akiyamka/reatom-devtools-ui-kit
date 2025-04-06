@@ -1,10 +1,10 @@
-import { css } from 'vite-css-in-js';
 import { useSignal } from '@preact/signals';
-import { SimpleFilter } from './SimpleFilter';
-import { AdvancedFilter } from './AdvancedFilter';
+import { css } from 'vite-css-in-js';
+import { type ProFilter, createFilter } from '../../../entities/filter';
 import { PlusIcon } from '../Icons/PlusIcon';
 import { Switch } from '../Switch';
-import { createFilter, type ProFilter } from '../../../entities/filter';
+import { AdvancedFilter } from './AdvancedFilter';
+import { SimpleFilter } from './SimpleFilter';
 
 const stl = {
   filters: css`

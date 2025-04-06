@@ -5,7 +5,7 @@
   "type": "module",
   "imports": {
     "#entities": "./entities/index.ts",
-    "#ui/*": "./ui/*"
+    "#ui/kit": "./ui/kit/index.ts"
   },
   "scripts": {
     "dev": "vite",

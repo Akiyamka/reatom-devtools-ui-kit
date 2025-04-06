@@ -1,8 +1,8 @@
-import { Tab } from '../ui/kit/Tab';
-import { Switch } from '../ui/kit/Switch';
-import { Header } from '../ui/kit/Header';
-import { SlidersIcon, PauseIcon, PlayIcon } from '../ui/kit/Icons';
 import { $recording } from '#entities';
+import { Header } from '../ui/kit/Header';
+import { PauseIcon, PlayIcon, SlidersIcon } from '../ui/kit/Icons';
+import { Switch } from '../ui/kit/Switch';
+import { Tab } from '../ui/kit/Tab';
 
 export function ControlsBar() {
   return (

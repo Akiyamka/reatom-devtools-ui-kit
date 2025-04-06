@@ -1,5 +1,5 @@
-import { useEffect } from 'preact/hooks';
 import { signal } from '@preact/signals';
+import { useEffect } from 'preact/hooks';
 import { css } from 'vite-css-in-js';
 import { mockEntities } from '#entities';
 import './app.css';
