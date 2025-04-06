@@ -50,7 +50,11 @@ const data: ReatomLogRecord[][] = [
 
   ...new Array(5000)
     .fill(null)
-    .map((_, i) => ({ name: `generatedAtom${i}`, type: 'stateChange' as const, payload: new Date() }))
+    .map((_, i) => ({
+      name: `generatedAtom${i}`,
+      type: 'stateChange' as const,
+      payload: new Date(),
+    }))
     .reduce(
       (acc, val) => {
         const last = acc[acc.length - 1];
@@ -61,7 +65,7 @@ const data: ReatomLogRecord[][] = [
         }
         return acc;
       },
-      [[]] as ReatomLogRecord[][]
-    )
+      [[]] as ReatomLogRecord[][],
+    ),
 ];
 export default data;

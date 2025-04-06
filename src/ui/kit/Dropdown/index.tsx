@@ -9,8 +9,8 @@ const stl = {
     box-sizing: border-box;
     margin-right: -6px;
     visibility: hidden;
-  `
-}
+  `,
+};
 
 export function Dropdown({ actions }: { actions: Action[] }) {
   return (

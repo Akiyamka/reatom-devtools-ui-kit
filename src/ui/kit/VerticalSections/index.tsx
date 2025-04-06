@@ -3,8 +3,10 @@ import { type JSX } from 'preact/jsx-runtime';
 import { css } from 'vite-css-in-js';
 
 const getSectionVarName = (i: number) => `--sec-${i}`;
-const getSectionVarValue = (el: HTMLElement, i: number) => parseInt(el.style.getPropertyValue(getSectionVarName(i)) || '0')
-const setSectionVarValue = (el: HTMLElement, i: number, val: number) => el.style.setProperty(getSectionVarName(i), `${val}px`);
+const getSectionVarValue = (el: HTMLElement, i: number) =>
+  parseInt(el.style.getPropertyValue(getSectionVarName(i)) || '0');
+const setSectionVarValue = (el: HTMLElement, i: number, val: number) =>
+  el.style.setProperty(getSectionVarName(i), `${val}px`);
 const minValue = 37;
 
 const stl = {
@@ -32,17 +34,17 @@ const stl = {
 
 function onDragStart(root: { current: HTMLDivElement | null }, index: number) {
   const findClosestNonZeroVar = (startFrom: number) => {
-    let i = startFrom
+    let i = startFrom;
     while (i > 0) {
       const x = getSectionVarValue(root.current, i);
       if (x > minValue) break;
       i--;
     }
-    return i
-  }
-  
+    return i;
+  };
+
   return (event: MouseEvent) => {
-    console.log("onDragStart: ", index);
+    console.log('onDragStart: ', index);
     const rootEl = root.current;
     if (rootEl === null) return;
     const initialY = event.clientY;
@@ -52,19 +54,19 @@ function onDragStart(root: { current: HTMLDivElement | null }, index: number) {
     const onMouseMove = (e: MouseEvent) => {
       const shift = initialY - e.clientY;
       const newHeight = initialValue + shift;
-      console.assert(index !== 0, 'Top section doesn\'t have a resize handle');
+      console.assert(index !== 0, "Top section doesn't have a resize handle");
       const newIndex = findClosestNonZeroVar(index - 1);
       if (newIndex !== closestIndex) {
         closestIndex = newIndex;
         initialClosestValue = getSectionVarValue(rootEl, closestIndex) + shift;
       }
-      const closestHeight = initialClosestValue - shift
+      const closestHeight = initialClosestValue - shift;
       setSectionVarValue(rootEl, index, Math.max(newHeight, minValue));
       // if (closestHeight <= minValue) {
       //   console.log('closestHeight', closestHeight)
       //   return; // Do not collapse to much, always keep header visible
       // }
-      setSectionVarValue(rootEl, closestIndex,  Math.max(closestHeight, minValue) );
+      setSectionVarValue(rootEl, closestIndex, Math.max(closestHeight, minValue));
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener(
@@ -72,7 +74,7 @@ function onDragStart(root: { current: HTMLDivElement | null }, index: number) {
       () => {
         document.removeEventListener('mousemove', onMouseMove);
       },
-      { once: true }
+      { once: true },
     );
   };
 }

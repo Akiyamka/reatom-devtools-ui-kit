@@ -56,9 +56,7 @@ const stl = {
   `,
 };
 
-export function AdvancedFilter<
-  T extends ProFilter
->({
+export function AdvancedFilter<T extends ProFilter>({
   filter,
   onRemove,
   onToggle,
@@ -75,7 +73,7 @@ export function AdvancedFilter<
       <div class={stl.filterControls}>
         <Switch
           enabled={filter.$searchScope.value === 'name'}
-          onClick={() =>filter.toggleSearchScope()}
+          onClick={() => filter.toggleSearchScope()}
           iconOn={<div class={`${stl.modeBtn} ${stl.scopeBtn}`}>name</div>}
           iconOff={<div class={`${stl.modeBtn} ${stl.scopeBtn}`}>payload</div>}
         />

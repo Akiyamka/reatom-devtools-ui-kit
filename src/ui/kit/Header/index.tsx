@@ -26,7 +26,7 @@ const stl = {
   `,
 };
 
-export function Header({ tabs, actions }: { tabs: JSX.Element[]; actions: JSX.Element[] }) {
+export function Header({ tabs, actions }: { tabs: JSX.Element; actions: JSX.Element }) {
   return (
     <div class={stl.header}>
       <div class={stl.tabs}>{tabs}</div>

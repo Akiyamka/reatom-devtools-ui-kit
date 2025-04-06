@@ -4,13 +4,7 @@ export function LogEventTypeIcon({ type }: { type: ReatomLogEventType }) {
   switch (type) {
     case 'stateChange':
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="none"
-          viewBox="0 0 16 16"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
           <path
             stroke="currentColor"
             stroke-linecap="round"
@@ -40,13 +34,7 @@ export function LogEventTypeIcon({ type }: { type: ReatomLogEventType }) {
 
     case 'actionFired':
       return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="none"
-          viewBox="0 0 16 16"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
           <path
             stroke="currentColor"
             stroke-linecap="round"

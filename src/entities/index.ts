@@ -1,5 +1,6 @@
 import { computed, signal } from '@preact/signals';
 import { ReatomLogRecord } from './types';
+import mock from './mockData';
 
 const $all = signal<ReatomLogRecord[][]>([[]]);
 const $current = signal<ReatomLogRecord | null>(null);
@@ -29,9 +30,21 @@ export const entities = {
   },
   setFilter: (filter: string) => {
     $filter.value = filter;
-  }
+  },
+};
+
+export const mockEntities = () => {
+  entities.set(mock);
 };
 
 export type { ReatomLogRecord } from './types';
 
-export const $recording = signal(true);
+export const $recording = (() => {
+  const $recording = signal(true);
+  const actions = {
+    toggle: () => $recording.value = !$recording.value,
+    start: () => $recording.value = true,
+    stop: () => $recording.value = false,
+  }
+  return Object.assign($recording, actions)
+})();

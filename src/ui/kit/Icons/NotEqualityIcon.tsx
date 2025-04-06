@@ -1,9 +1,21 @@
 export const NotEqualityIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.11806 12H13C13.5523 12 14 11.5523 14 11C14 10.4477 13.5523 10 13 10H9.11806L8.11806 12Z" fill="currentColor" />
-    <path d="M6.88199 10H3C2.44772 10 2 10.4477 2 11C2 11.5523 2.44772 12 3 12H5.88199L6.88199 10Z" fill="currentColor" />
-    <path d="M11.1181 6H13C13.5523 6 14 5.55228 14 5C14 4.44772 13.5523 4 13 4H12.1181L11.1181 6Z" fill="currentColor" />
-    <path d="M9.88199 4H3C2.44772 4 2 4.44772 2 5C2 5.55228 2.44772 6 3 6H8.88199L9.88199 4Z" fill="currentColor" />
+    <path
+      d="M8.11806 12H13C13.5523 12 14 11.5523 14 11C14 10.4477 13.5523 10 13 10H9.11806L8.11806 12Z"
+      fill="currentColor"
+    />
+    <path
+      d="M6.88199 10H3C2.44772 10 2 10.4477 2 11C2 11.5523 2.44772 12 3 12H5.88199L6.88199 10Z"
+      fill="currentColor"
+    />
+    <path
+      d="M11.1181 6H13C13.5523 6 14 5.55228 14 5C14 4.44772 13.5523 4 13 4H12.1181L11.1181 6Z"
+      fill="currentColor"
+    />
+    <path
+      d="M9.88199 4H3C2.44772 4 2 4.44772 2 5C2 5.55228 2.44772 6 3 6H8.88199L9.88199 4Z"
+      fill="currentColor"
+    />
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"

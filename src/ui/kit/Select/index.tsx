@@ -1,4 +1,4 @@
-export function Select({ options } : { options: string[] }) {
+export function Select({ options }: { options: string[] }) {
   return (
     <select>
       {options.map((option) => (
@@ -6,5 +6,4 @@ export function Select({ options } : { options: string[] }) {
       ))}
     </select>
   );
-
 }

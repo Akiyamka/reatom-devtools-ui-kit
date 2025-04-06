@@ -57,7 +57,11 @@ type Direction = 'right' | 'left' | 'top';
 
 function onDragStart(
   el: { current: HTMLDivElement | null },
-  settings: { direction: Direction; onCollapse?: () => void; collapseThreshold?: number }
+  settings: {
+    direction: Direction;
+    onCollapse?: () => void;
+    collapseThreshold?: number;
+  },
 ) {
   return (event: MouseEvent) => {
     const initialX = event.clientX;
@@ -84,7 +88,7 @@ function onDragStart(
       () => {
         document.removeEventListener('mousemove', onMouseMove);
       },
-      { once: true }
+      { once: true },
     );
   };
 }

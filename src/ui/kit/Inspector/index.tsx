@@ -29,24 +29,66 @@ export function Inspector({ record }: { record: ReatomLogRecord | null }) {
     <div class={stl.inspector}>
       <VerticalSections>
         <Section title={'Trace'}>
-          <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+          <ReatomLogEvent
+            key={record.name}
+            name={record.name}
+            type={record.type}
+            selected={false}
+            actions={[]}
+          />
           <TraceRow>
-            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+            <ReatomLogEvent
+              key={record.name}
+              name={record.name}
+              type={record.type}
+              selected={false}
+              actions={[]}
+            />
           </TraceRow>
           <TraceRow>
-            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+            <ReatomLogEvent
+              key={record.name}
+              name={record.name}
+              type={record.type}
+              selected={false}
+              actions={[]}
+            />
           </TraceRow>
           <TraceRow>
-            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+            <ReatomLogEvent
+              key={record.name}
+              name={record.name}
+              type={record.type}
+              selected={false}
+              actions={[]}
+            />
           </TraceRow>
           <TraceRow>
-            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+            <ReatomLogEvent
+              key={record.name}
+              name={record.name}
+              type={record.type}
+              selected={false}
+              actions={[]}
+            />
           </TraceRow>
           <TraceRow>
-            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+            <ReatomLogEvent
+              key={record.name}
+              name={record.name}
+              type={record.type}
+              selected={false}
+              actions={[]}
+            />
           </TraceRow>
           <TraceRow>
-            <ReatomLogEvent key={record.name} name={record.name} type={record.type} selected={false} actions={[]} />
+            <ReatomLogEvent
+              key={record.name}
+              name={record.name}
+              type={record.type}
+              selected={false}
+              actions={[]}
+            />
           </TraceRow>
         </Section>
         <Section title={'State'}>

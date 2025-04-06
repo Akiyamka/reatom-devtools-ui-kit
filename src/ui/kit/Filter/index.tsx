@@ -57,15 +57,13 @@ const stl = {
     border: 1px solid var(--level-4);
     font-size: 0.9em;
     font-weight: 600;
-  `
-  
+  `,
 };
 
 const Mods = Object.freeze({
   Easy: 'Easy',
   Pro: 'Pro',
 } as const);
-
 
 export function Filter({ onInput }: { onInput: (value: string) => void }) {
   const $searchMode = useSignal<keyof typeof Mods>(Mods.Pro);
@@ -99,7 +97,7 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
         <Switch
           enabled={$searchMode.value === Mods.Pro}
           onClick={() => ($searchMode.value = $searchMode.value === Mods.Easy ? Mods.Pro : Mods.Easy)}
-          iconOn={<div class={stl.switch}>Easy</div> }
+          iconOn={<div class={stl.switch}>Easy</div>}
           iconOff={<div class={stl.switch}>Pro</div>}
         />
       </div>

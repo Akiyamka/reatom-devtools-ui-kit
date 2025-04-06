@@ -1,1 +1,1 @@
-export type ReatomLogEventType = 'stateChange' | 'actionFired'
+export type ReatomLogEventType = 'stateChange' | 'actionFired';

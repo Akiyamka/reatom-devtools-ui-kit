@@ -22,7 +22,10 @@ const stl = {
   `,
 };
 
-export function SimpleFilter({ placeholder, onInput }: { placeholder: string; onInput: (value: string) => void }) {
+export function SimpleFilter({
+  placeholder,
+  onInput,
+}: { placeholder: string; onInput: (value: string) => void }) {
   return (
     <div class={stl.root}>
       <input

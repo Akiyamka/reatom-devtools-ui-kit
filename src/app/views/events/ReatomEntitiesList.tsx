@@ -1,9 +1,9 @@
 import { css } from 'vite-css-in-js';
-import { entities } from './entities';
 import { Virtuoso } from 'react-virtuoso';
-import { ReatomLogEvent } from './ui/kit/ReatomLogEvent';
-import { Stack } from './ui/kit/Stack';
-import { Code } from './ui/kit/Code';
+import { Stack } from '#ui/kit/Stack';
+import { entities } from '#entities';
+import { ReatomLogEvent } from '#ui/kit/ReatomLogEvent';
+import { Code } from 'lucide-react';
 
 const stl = {
   listRoot: css`

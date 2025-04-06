@@ -54,7 +54,7 @@ const stl = {
   content: css`
     padding: 4px 8px;
     background-color: var(--level-1);
-  `
+  `,
 };
 
 export function ReatomLogEvent({

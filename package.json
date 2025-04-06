@@ -3,22 +3,30 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "imports": {
+    "#entities": "./entities/index.ts",
+    "#ui/*": "./ui/*"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "npx @biomejs/biome format --write ./src"
   },
   "dependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@preact/signals": "^1.2.2",
     "lucide-react": "^0.479.0",
     "preact": "^10.19.4",
     "react-virtuoso": "^4.7.2",
-    "vite-css-in-js": "^1.3.1"
+    "vite-css-in-js": "^1.3.1",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.8.1",
     "typescript": "^5.2.2",
-    "vite": "^5.1.1"
+    "vite": "^5.1.1",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "packageManager": "pnpm@8.15.3+sha256.fc4a49bd609550a41e14d20efbce802a4b892aa4cac877322de2f0924f122991"
 }
