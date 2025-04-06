@@ -1,7 +1,7 @@
 import { css } from 'vite-css-in-js';
 import { entities } from '#entities';
 import { Filter, Inspector, Resizable } from '#ui/kit';
-import { ReatomEntitiesList } from './ReatomEntitiesList.ts';
+import { ReatomEntitiesList } from './ReatomEntitiesList.tsx';
 
 const stl = {
   aside: css`

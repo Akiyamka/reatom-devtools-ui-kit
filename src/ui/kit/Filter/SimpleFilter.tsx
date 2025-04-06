@@ -1,5 +1,5 @@
 import { css } from 'vite-css-in-js';
-import { RegexpIcon } from '../Icons/RegexpIcon';
+import { RegexpIcon } from '../Icons/RegexpIcon.tsx';
 
 const stl = {
   root: css`
@@ -34,7 +34,7 @@ export function SimpleFilter({
         placeholder={placeholder}
         onChange={(e) => onInput(e.currentTarget.value)}
       />
-      <button>
+      <button type="button">
         <RegexpIcon />
       </button>
     </div>

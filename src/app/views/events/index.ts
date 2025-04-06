@@ -1,1 +1,1 @@
-export { EventsView } from './EventsView';
+export { EventsView } from './EventsView.tsx';

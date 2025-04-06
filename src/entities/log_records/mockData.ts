@@ -1,4 +1,4 @@
-import { ReatomLogRecord } from '../entities';
+import type { ReatomLogRecord } from './index.ts';
 
 class Observable {}
 

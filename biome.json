@@ -11,7 +11,11 @@
     }
   },
   "linter": {
-    "enabled": false
+    "rules": {
+      "correctness": {
+        "useImportExtensions": "error"
+      }
+    }
   },
   "organizeImports": {
     "enabled": true

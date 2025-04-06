@@ -1,13 +1,13 @@
 import { css } from 'vite-css-in-js';
-import type { ProFilter } from '../../../entities/filter';
-import { EqualityIcon } from '../Icons/EqualityIcon';
-import { EyeIcon } from '../Icons/EyeIcon';
-import { FilterIcon } from '../Icons/FilterIcon';
-import { HighlighIcon } from '../Icons/HighlighIcon';
-import { NotEqualityIcon } from '../Icons/NotEqualityIcon';
-import { TrashIcon } from '../Icons/TrashIcon';
-import { Switch } from '../Switch';
-import { SimpleFilter } from './SimpleFilter';
+import type { ProFilter } from '#entities'
+import { EqualityIcon } from '../Icons/EqualityIcon.tsx';
+import { EyeIcon } from '../Icons/EyeIcon.tsx';
+import { FilterIcon } from '../Icons/FilterIcon.tsx';
+import { HighlighIcon } from '../Icons/HighlighIcon.tsx';
+import { NotEqualityIcon } from '../Icons/NotEqualityIcon.tsx';
+import { TrashIcon } from '../Icons/TrashIcon.tsx';
+import { Switch } from '../Switch/index.tsx';
+import { SimpleFilter } from './SimpleFilter.tsx';
 
 const stl = {
   root: css`
@@ -67,7 +67,7 @@ export function AdvancedFilter<T extends ProFilter>({
 }) {
   return (
     <div class={stl.root}>
-      <button class={stl.controlBtn} onClick={() => onToggle(filter)}>
+      <button type="button" class={stl.controlBtn} onClick={() => onToggle(filter)}>
         <EyeIcon />
       </button>
       <div class={stl.filterControls}>
@@ -77,17 +77,17 @@ export function AdvancedFilter<T extends ProFilter>({
           iconOn={<div class={`${stl.modeBtn} ${stl.scopeBtn}`}>name</div>}
           iconOff={<div class={`${stl.modeBtn} ${stl.scopeBtn}`}>payload</div>}
         />
-        <button class={stl.modeBtn} onClick={() => filter.toggleInvert()}>
+        <button type="button" class={stl.modeBtn} onClick={() => filter.toggleInvert()}>
           {filter.$inverted.value ? <NotEqualityIcon /> : <EqualityIcon />}
         </button>
         <div class={stl.filter}>
-          <SimpleFilter placeholder="Filter" />
+          <SimpleFilter onInput={console.log} placeholder="Filter" />
         </div>
-        <button class={stl.modeBtn} onClick={() => filter.toggleHighlight()}>
+        <button type="button" class={stl.modeBtn} onClick={() => filter.toggleHighlight()}>
           {filter.$highlighted.value ? <HighlighIcon /> : <FilterIcon />}
         </button>
       </div>
-      <button class={stl.controlBtn} onClick={() => onRemove(filter)}>
+      <button type="button" class={stl.controlBtn} onClick={() => onRemove(filter)}>
         <TrashIcon />
       </button>
     </div>

@@ -1,10 +1,10 @@
 import { useSignal } from '@preact/signals';
 import { css } from 'vite-css-in-js';
-import { type ProFilter, createFilter } from '../../../entities/filter';
-import { PlusIcon } from '../Icons/PlusIcon';
-import { Switch } from '../Switch';
-import { AdvancedFilter } from './AdvancedFilter';
-import { SimpleFilter } from './SimpleFilter';
+import { type ProFilter, createFilter } from '#entities';
+import { PlusIcon } from '../Icons/PlusIcon.tsx';
+import { Switch } from '../Switch/index.tsx';
+import { AdvancedFilter } from './AdvancedFilter.tsx';
+import { SimpleFilter } from './SimpleFilter.tsx';
 
 const stl = {
   filters: css`
@@ -66,7 +66,7 @@ const Mods = Object.freeze({
 } as const);
 
 export function Filter({ onInput }: { onInput: (value: string) => void }) {
-  const $searchMode = useSignal<keyof typeof Mods>(Mods.Pro);
+  const $searchMode = useSignal<keyof typeof Mods>(Mods.Easy);
   const $proFilters = useSignal<ProFilter[]>([createFilter(), createFilter(), createFilter()]);
 
   return (
@@ -87,7 +87,10 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
           ))}
           <button
             class={stl.addBtn}
-            onClick={() => ($proFilters.value = [...$proFilters.value, createFilter()])}
+            onClick={() => {
+              $proFilters.value = [...$proFilters.value, createFilter()];
+            }}
+            type="button"
           >
             <PlusIcon /> Add filter
           </button>
@@ -96,7 +99,9 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
       <div class={stl.actions}>
         <Switch
           enabled={$searchMode.value === Mods.Pro}
-          onClick={() => ($searchMode.value = $searchMode.value === Mods.Easy ? Mods.Pro : Mods.Easy)}
+          onClick={() => {
+            $searchMode.value = $searchMode.value === Mods.Easy ? Mods.Pro : Mods.Easy;
+          }}
           iconOn={<div class={stl.switch}>Easy</div>}
           iconOff={<div class={stl.switch}>Pro</div>}
         />
