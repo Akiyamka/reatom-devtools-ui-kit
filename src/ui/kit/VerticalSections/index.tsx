@@ -69,54 +69,55 @@ function onDragStart(
     const onMouseMove = (e: MouseEvent) => {
       const shift = Math.ceil(initialY - e.clientY);
       const changeset: number[] = []
+      let canContonue = true;
 
       // Apply shift for above panel
-      let i = handleIdx - 1;
-      let aboveShift = shift;
-      while (i >= 0) {
-        const newHeight = initialHeights[i] - aboveShift;
-        if (newHeight < minHeight) {
-          changeset[i] = minHeight
-          aboveShift = aboveShift - (initialHeights[i] - minHeight);
-          i--;
-        } else {
-          aboveShift = 0;
-          changeset[i] = newHeight;
-          break;
+      canContonue = (() => {
+        let aboveShift = shift;
+        let i = handleIdx - 1;
+        while (i >= 0) {
+          const newHeight = initialHeights[i] - aboveShift;
+          if (newHeight < minHeight) {
+            changeset[i] = minHeight
+            aboveShift = aboveShift - (initialHeights[i] - minHeight);
+            i--;
+          } else {
+            aboveShift = 0;
+            changeset[i] = newHeight;
+            break;
+          }
         }
-      }
-      if (aboveShift !== 0) return; // Do not apply changes in one of pannels can't change
+        return aboveShift === 0
+      })()
+      if (!canContonue) return;
 
       // Apply shift for below pannel
-      let k = handleIdx;
-      let belowShift = shift;
-      while (k <= initialHeights.length - 1) {
-        const newHeight = initialHeights[k] + belowShift;
-        if (newHeight < minHeight) {
-          changeset[k] = minHeight;
-          belowShift = belowShift + (initialHeights[k] - minHeight);
-          k++;
-        } else {
-          belowShift = 0;
-          changeset[k] = newHeight;
-          break;
+      canContonue = (() => {
+        let belowShift = shift;
+        let k = handleIdx;
+        while (k <= initialHeights.length - 1) {
+          const newHeight = initialHeights[k] + belowShift;
+          if (newHeight < minHeight) {
+            changeset[k] = minHeight;
+            belowShift = belowShift + (initialHeights[k] - minHeight);
+            k++;
+          } else {
+            belowShift = 0;
+            changeset[k] = newHeight;
+            break;
+          }
         }
-      }
-      if (belowShift !== 0) return; // Do not apply changes in one of pannels can't change
+        return belowShift === 0
+      })()
+      if (!canContonue) return;
 
-      let check = 0;
+      // Apply changes
       let section = totalSections;
-      while(section >= 0) {
+      while (section >= 0) {
         const finalHeight = changeset[section] ?? initialHeights[section];
-        check += finalHeight
         setSectionHeight(section, finalHeight)
         section--
       }
-      console.log(changeset.map(c => c - 300), shift, [
-        getSectionVarValue(root.current, 0),
-        getSectionVarValue(root.current, 1),
-        getSectionVarValue(root.current, 2)
-      ], checksumm - check)
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener(
