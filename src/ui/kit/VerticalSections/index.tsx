@@ -1,13 +1,15 @@
 import { useLayoutEffect, useRef } from 'preact/hooks';
-import { type JSX } from 'preact/jsx-runtime';
+import type { JSX } from 'preact/jsx-runtime';
 import { css } from 'vite-css-in-js';
 
 const getSectionVarName = (i: number) => `--sec-${i}`;
-const getSectionVarValue = (el: HTMLElement, i: number) =>
-  parseInt(el.style.getPropertyValue(getSectionVarName(i)) || '0');
+const getSectionVarValue = (el: HTMLElement, i: number): number | null => {
+  const cssVarVal = el.style.getPropertyValue(getSectionVarName(i));
+  if (cssVarVal !== '') return Number.parseInt(cssVarVal);
+  return null;
+};
 const setSectionVarValue = (el: HTMLElement, i: number, val: number) =>
   el.style.setProperty(getSectionVarName(i), `${val}px`);
-const minValue = 37;
 
 const stl = {
   column: css`
@@ -21,52 +23,100 @@ const stl = {
     flex-flow: column nowrap;
     min-height: 0;
     box-sizing: border-box;
+    box-shadow: inset 0 0 0 2px rgba(255,0,0,.8);
   `,
   resizeHandle: css`
     width: 100%;
     height: 6px;
-    /* background-color: chocolate; */
+    background-color: chocolate;
     cursor: row-resize;
     flex-shrink: 0;
     user-select: none;
   `,
 };
 
-function onDragStart(root: { current: HTMLDivElement | null }, index: number) {
-  const findClosestNonZeroVar = (startFrom: number) => {
-    let i = startFrom;
-    while (i > 0) {
-      const x = getSectionVarValue(root.current, i);
-      if (x > minValue) break;
-      i--;
-    }
-    return i;
-  };
-
+function onDragStart(
+  root: { current: HTMLDivElement | null },
+  handleIdx: number,
+  { minHeight }: { minHeight: number },
+) {
+  // Find the next section along direction of mouse move (above or below)
+  // And change it height. If it already has minimum height, stop resizing it,
+  // And find next. If it last section, stop resizing it
+  // Resize pannels back until mouseup
   return (event: MouseEvent) => {
-    console.log('onDragStart: ', index);
     const rootEl = root.current;
     if (rootEl === null) return;
     const initialY = event.clientY;
-    const initialValue = getSectionVarValue(rootEl, index);
-    let closestIndex: number;
-    let initialClosestValue: number;
+    console.assert(handleIdx !== 0, "Top section doesn't have a resize handle");
+    const setSectionHeight = (sec: number, hegith: number) => setSectionVarValue(rootEl, sec, hegith);
+
+    // Prepare initial heights;
+    const initialHeights: number[] = [];
+    let checksumm = 0;
+    let section = 0;
+    while (true) {
+      const initialHeight = getSectionVarValue(root.current, section);
+      if (initialHeight !== null) {
+        initialHeights.push(initialHeight);
+        checksumm += initialHeight;
+        section++;
+      } else break;
+    }
+    const totalSections = section - 1;
+
+    // TODO - fix rounding issue by swith to procents isntead of pixels
     const onMouseMove = (e: MouseEvent) => {
-      const shift = initialY - e.clientY;
-      const newHeight = initialValue + shift;
-      console.assert(index !== 0, "Top section doesn't have a resize handle");
-      const newIndex = findClosestNonZeroVar(index - 1);
-      if (newIndex !== closestIndex) {
-        closestIndex = newIndex;
-        initialClosestValue = getSectionVarValue(rootEl, closestIndex) + shift;
+      const shift = Math.ceil(initialY - e.clientY);
+      const changeset: number[] = []
+
+      // Apply shift for above panel
+      let i = handleIdx - 1;
+      let aboveShift = shift;
+      while (i >= 0) {
+        const newHeight = initialHeights[i] - aboveShift;
+        if (newHeight < minHeight) {
+          changeset[i] = minHeight
+          aboveShift = aboveShift - (initialHeights[i] - minHeight);
+          i--;
+        } else {
+          aboveShift = 0;
+          changeset[i] = newHeight;
+          break;
+        }
       }
-      const closestHeight = initialClosestValue - shift;
-      setSectionVarValue(rootEl, index, Math.max(newHeight, minValue));
-      // if (closestHeight <= minValue) {
-      //   console.log('closestHeight', closestHeight)
-      //   return; // Do not collapse to much, always keep header visible
-      // }
-      setSectionVarValue(rootEl, closestIndex, Math.max(closestHeight, minValue));
+      if (aboveShift !== 0) return; // Do not apply changes in one of pannels can't change
+
+      // Apply shift for below pannel
+      let k = handleIdx;
+      let belowShift = shift;
+      while (k <= initialHeights.length - 1) {
+        const newHeight = initialHeights[k] + belowShift;
+        if (newHeight < minHeight) {
+          changeset[k] = minHeight;
+          belowShift = belowShift + (initialHeights[k] - minHeight);
+          k++;
+        } else {
+          belowShift = 0;
+          changeset[k] = newHeight;
+          break;
+        }
+      }
+      if (belowShift !== 0) return; // Do not apply changes in one of pannels can't change
+
+      let check = 0;
+      let section = totalSections;
+      while(section >= 0) {
+        const finalHeight = changeset[section] ?? initialHeights[section];
+        check += finalHeight
+        setSectionHeight(section, finalHeight)
+        section--
+      }
+      console.log(changeset.map(c => c - 300), shift, [
+        getSectionVarValue(root.current, 0),
+        getSectionVarValue(root.current, 1),
+        getSectionVarValue(root.current, 2)
+      ], checksumm - check)
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener(
@@ -81,10 +131,10 @@ function onDragStart(root: { current: HTMLDivElement | null }, index: number) {
 
 export function VerticalSections({
   children,
-  collapseThreshold = 50,
+  minHeight = 100,
 }: {
   children: JSX.Element[];
-  collapseThreshold?: number;
+  minHeight?: number;
 }) {
   const rootElRef = useRef<HTMLDivElement>(null);
   const cellsRefs = useRef<HTMLDivElement[]>([]);
@@ -103,8 +153,15 @@ export function VerticalSections({
   return (
     <div class={stl.column} ref={rootElRef}>
       {children.map((child, i) => (
-        <div class={stl.cell} ref={(el) => (cellsRefs.current[i] = el!)}>
-          {i !== 0 && <div class={stl.resizeHandle} onMouseDown={onDragStart(rootElRef, i)}></div>}
+        <div
+          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+          key={i}
+          class={stl.cell}
+          ref={(el) => {
+            cellsRefs.current[i] = el!;
+          }}
+        >
+          {i !== 0 && <div class={stl.resizeHandle} onMouseDown={onDragStart(rootElRef, i, { minHeight })} />}
           {child}
         </div>
       ))}
