@@ -1,4 +1,4 @@
-import { ComponentChild, type JSX } from 'preact';
+import type { ComponentChild } from 'preact';
 import { useLayoutEffect, useRef } from 'preact/hooks';
 
 import { css } from 'vite-css-in-js';
@@ -66,7 +66,7 @@ function onDragStart(
   return (event: MouseEvent) => {
     const initialX = event.clientX;
     const initialY = event.clientY;
-    const initialValue = parseInt(el.current?.style.getPropertyValue('--resizable-value') || '0');
+    const initialValue = Number.parseInt(el.current?.style.getPropertyValue('--resizable-value') || '0');
     const onMouseMove = (e: MouseEvent) => {
       let shift = 0;
       if (settings.direction === 'right') {
@@ -109,19 +109,22 @@ type ResizableProps =
 
 export function Resizable({ children, defaultValue, direction, ...rest }: ResizableProps) {
   const rootElRef = useRef<HTMLDivElement>(null);
+  const collapseThreshold = 'collapseThreshold' in rest ? rest.collapseThreshold : null;
+  const onCollapse = 'onCollapse' in rest ? rest.onCollapse : null;
+
   useLayoutEffect(() => {
     if (!defaultValue) return;
-    if ('collapseThreshold' in rest) {
-      if (defaultValue > rest.collapseThreshold) {
+    if (collapseThreshold) {
+      if (defaultValue > collapseThreshold) {
         rootElRef.current?.style.setProperty('--resizable-value', `${defaultValue}px`);
       } else {
-        rootElRef.current?.style.setProperty('--resizable-value', `0px`);
-        rest.onCollapse?.();
+        rootElRef.current?.style.setProperty('--resizable-value', '0px');
+        onCollapse?.();
       }
     } else {
       rootElRef.current?.style.setProperty('--resizable-value', `${defaultValue}px`);
     }
-  }, [defaultValue]);
+  }, [defaultValue, collapseThreshold, onCollapse]);
   return (
     <div class={stl.root} data-direction={direction} ref={rootElRef}>
       {children}
@@ -129,7 +132,7 @@ export function Resizable({ children, defaultValue, direction, ...rest }: Resiza
         id="grip"
         class={`${stl.grip} ${stl[direction]}`}
         onMouseDown={onDragStart(rootElRef, { direction, ...rest })}
-      ></div>
+        />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import { css } from 'vite-css-in-js';
-import type { ReatomLogRecord } from '../../../entities';
-import { Code } from '../Code';
-import { ReatomLogEvent } from '../ReatomLogEvent';
-import { VerticalSections } from '../VerticalSections';
-import { Section } from './Section';
-import { TraceRow } from './TraceRow';
+import type { ReatomLogRecord } from '#entities';
+import { Code } from '../Code/index.tsx';
+import { ReatomLogEvent } from '../ReatomLogEvent/index.tsx';
+import { VerticalSections } from '../VerticalSections/index.tsx';
+import { Section } from './Section.tsx';
+import { TraceRow } from './TraceRow.tsx';
 
 const stl = {
   inspector: css`

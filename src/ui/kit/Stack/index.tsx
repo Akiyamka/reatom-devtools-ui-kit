@@ -38,7 +38,7 @@ export const Stack = memo(function Stack({
 }) {
   return (
     <div class={stl.stack}>
-      <div class={stl.indicator} data-odd={i % 2 === 0}></div>
+      <div class={stl.indicator} data-odd={i % 2 === 0} />
       <div class={stl.slot}>
         {title && <div class={stl.title}>{title}</div>}
         <div>{children}</div>

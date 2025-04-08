@@ -1,6 +1,6 @@
 import type { JSX } from 'preact/jsx-runtime';
 import { css } from 'vite-css-in-js';
-import { ArrowUpIcon } from '../Icons/ArrowUpIcon';
+import { ArrowUpIcon } from '../Icons/ArrowUpIcon.tsx';
 
 const stl = {
   traceRow: css`
