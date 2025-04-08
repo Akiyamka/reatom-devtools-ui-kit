@@ -23,15 +23,20 @@ const stl = {
     flex-flow: column nowrap;
     min-height: 0;
     box-sizing: border-box;
-    box-shadow: inset 0 0 0 2px rgba(255,0,0,.8);
+    /* box-shadow: inset 0 0 0 2px rgba(255,0,0,.8); */
   `,
   resizeHandle: css`
+    position: relative;
+    top: 3px;
     width: 100%;
     height: 6px;
-    background-color: chocolate;
+
     cursor: row-resize;
     flex-shrink: 0;
     user-select: none;
+    &:hover {
+      background-color: var(--level-5);
+    }
   `,
 };
 
@@ -40,39 +45,35 @@ function onDragStart(
   handleIdx: number,
   { minHeight }: { minHeight: number },
 ) {
-  // Find the next section along direction of mouse move (above or below)
-  // And change it height. If it already has minimum height, stop resizing it,
-  // And find next. If it last section, stop resizing it
-  // Resize pannels back until mouseup
   return (event: MouseEvent) => {
     const rootEl = root.current;
     if (rootEl === null) return;
     const initialY = event.clientY;
     console.assert(handleIdx !== 0, "Top section doesn't have a resize handle");
-    const setSectionHeight = (sec: number, hegith: number) => setSectionVarValue(rootEl, sec, hegith);
+    const setSectionHeight = (sec: number, height: number) => setSectionVarValue(rootEl, sec, height);
 
     // Prepare initial heights;
     const initialHeights: number[] = [];
-    let checksumm = 0;
+    let checksum = 0;
     let section = 0;
+    if (!root.current) return;
     while (true) {
       const initialHeight = getSectionVarValue(root.current, section);
       if (initialHeight !== null) {
         initialHeights.push(initialHeight);
-        checksumm += initialHeight;
+        checksum += initialHeight;
         section++;
       } else break;
     }
     const totalSections = section - 1;
 
-    // TODO - fix rounding issue by swith to procents isntead of pixels
     const onMouseMove = (e: MouseEvent) => {
       const shift = Math.ceil(initialY - e.clientY);
       const changeset: number[] = []
-      let canContonue = true;
+      let canContinue = true;
 
       // Apply shift for above panel
-      canContonue = (() => {
+      canContinue = (() => {
         let aboveShift = shift;
         let i = handleIdx - 1;
         while (i >= 0) {
@@ -89,10 +90,10 @@ function onDragStart(
         }
         return aboveShift === 0
       })()
-      if (!canContonue) return;
+      if (!canContinue) return;
 
-      // Apply shift for below pannel
-      canContonue = (() => {
+      // Apply shift for below panel
+      canContinue = (() => {
         let belowShift = shift;
         let k = handleIdx;
         while (k <= initialHeights.length - 1) {
@@ -109,7 +110,7 @@ function onDragStart(
         }
         return belowShift === 0
       })()
-      if (!canContonue) return;
+      if (!canContinue) return;
 
       // Apply changes
       let section = totalSections;
