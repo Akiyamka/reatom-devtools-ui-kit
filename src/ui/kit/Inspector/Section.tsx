@@ -1,5 +1,7 @@
+import { useSignal } from '@preact/signals';
 import type { JSX } from 'preact/jsx-runtime';
 import { css } from 'vite-css-in-js';
+import { ChevronDownIcon } from '../Icons/index.ts';
 
 const stl = {
   section: css`
@@ -20,7 +22,7 @@ const stl = {
   `,
 };
 
-export const SectionTitle = ({ children }: { children: string | JSX.Element[] | JSX.Element }) => (
+export const SectionTitle = ({ children }: { children: string | (string | JSX.Element)[] | JSX.Element }) => (
   <div class={stl.sectionTitle}>{children}</div>
 );
 
@@ -37,10 +39,23 @@ export function Section({
   title: string;
   greedy?: boolean;
 }) {
+  const isOpen = useSignal(true);
+
   return (
     <div class={stl.section} data-greedy={greedy}>
-      <SectionTitle>{title}</SectionTitle>
-      <SectionContent>{children}</SectionContent>
+      <SectionTitle>
+        <button
+          type="button"
+          aria-label="Collapse section"
+          onClick={() => {
+            isOpen.value = !isOpen.value;
+          }}
+        >
+          <ChevronDownIcon />
+        </button>
+        {title}
+      </SectionTitle>
+      {isOpen.value && <SectionContent>{children}</SectionContent>}
     </div>
   );
 }
