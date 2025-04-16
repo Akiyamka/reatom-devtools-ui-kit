@@ -45,11 +45,16 @@ const stl = {
     }
   `,
   addBtn: css`
-    padding: 4px 8px;
+    padding: 6px 8px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
+    padding-right: 8px;
+    margin: 4px;
+    margin-right: auto;
+    background-color: var(--level-3);
+    text-transform: uppercase;
   `,
   switch: css`
     padding: 6px;
@@ -92,7 +97,11 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
             }}
             type="button"
           >
-            <PlusIcon /> Add filter
+            <PlusIcon /><span class={css`
+              padding-left: 4px;
+              padding-right: 4px;
+              font-size: 0.8em;
+            `}>Add filter</span>
           </button>
         </div>
       )}
@@ -102,8 +111,8 @@ export function Filter({ onInput }: { onInput: (value: string) => void }) {
           onClick={() => {
             $searchMode.value = $searchMode.value === Mods.Easy ? Mods.Pro : Mods.Easy;
           }}
-          iconOn={<div class={stl.switch}>Easy</div>}
-          iconOff={<div class={stl.switch}>Pro</div>}
+          iconOn={<button type="button" class={stl.switch}>Easy</button>}
+          iconOff={<button type="button" class={stl.switch}>Pro</button>}
         />
       </div>
     </div>
