@@ -1,29 +1,23 @@
-# List of dictionaries to use for spell checking
-# Default: ["en_us"]
-# Other options include: "en_gb", "es"
-dictionaries = ["en_us", "en_gb"]
-
-# Custom allowlist of words to ignore (case-insensitive)
-# Codebook will add words here when you select "Add to dictionary"
-# Default: []
-words = ["codebook", "rustc", "mousemove", "mouseup", "vite", "preact"]
-
-# Words that should always be flagged as incorrect
-# Default: []
-flag_words = ["todo", "fixme"]
-
-# List of glob patterns for paths to ignore when spell checking
-# Default: []
-ignore_paths = [".git/**/*", "node_modules/**/*"]
-
-# List of regex patterns to ignore when spell checking
-# Useful for domain-specific strings or patterns
-# Default: []
-ignore_patterns = [
-  "^[a-zA-Z]{1,3}$"
+dictionaries = [
+    "en_us",
+    "en_gb",
 ]
-
-# Whether to use global configuration (project config only)
-# Set to false to completely ignore global settings
-# Default: true
+words = [
+    "codebook",
+    "mousemove",
+    "mouseup",
+    "preact",
+    "rustc",
+    "todo",
+    "vite",
+]
+flag_words = [
+    "todo",
+    "fixme",
+]
+ignore_paths = [
+    ".git/**/*",
+    "node_modules/**/*",
+]
+ignore_patterns = ["^[a-zA-Z]{1,3}$"]
 use_global = true
