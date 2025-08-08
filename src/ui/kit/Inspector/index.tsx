@@ -3,6 +3,7 @@ import type { ReatomLogRecord } from '#entities';
 import { Code } from '../Code/index.tsx';
 import { ReatomLogEvent } from '../ReatomLogEvent/index.tsx';
 import { VerticalSections } from '../VerticalSections/index.tsx';
+
 import { Section } from './Section.tsx';
 import { TraceRow } from './TraceRow.tsx';
 

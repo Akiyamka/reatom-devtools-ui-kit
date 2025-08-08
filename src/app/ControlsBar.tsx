@@ -1,8 +1,8 @@
 import { $recording } from '#entities';
-import { Header } from '../ui/kit/Header';
-import { PauseIcon, PlayIcon, SlidersIcon } from '../ui/kit/Icons';
-import { Switch } from '../ui/kit/Switch';
-import { Tab } from '../ui/kit/Tab';
+import { Header } from '../ui/kit/Header/index.tsx';
+import { PauseIcon, PlayIcon, SlidersIcon } from '../ui/kit/Icons/index.ts';
+import { Switch } from '../ui/kit/Switch/index.tsx';
+import { Tab } from '../ui/kit/Tab/index.tsx';
 
 export function ControlsBar() {
   return (
@@ -15,7 +15,7 @@ export function ControlsBar() {
       }
       actions={
         <>
-          <button title={'Pause'}>
+          <button type="button" title={'Pause'}>
             <Switch
               enabled={$recording.value}
               onClick={$recording.toggle}
@@ -24,7 +24,7 @@ export function ControlsBar() {
               flashing
             />
           </button>
-          <button title={'Settings'}>
+          <button type="button" title={'Settings'}>
             <SlidersIcon />
           </button>
         </>

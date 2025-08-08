@@ -1,7 +1,9 @@
 import { useSignal } from '@preact/signals';
+import { useContext } from 'preact/hooks';
 import type { JSX } from 'preact/jsx-runtime';
 import { css } from 'vite-css-in-js';
 import { ChevronDownIcon } from '../Icons/index.ts';
+import { VerticalSectionsContext } from '../VerticalSections/context.ts';
 
 const stl = {
   section: css`
@@ -39,18 +41,17 @@ export function Section({
   title: string;
   greedy?: boolean;
 }) {
+  const collapseSection = useContext(VerticalSectionsContext);
   const isOpen = useSignal(true);
+  const toggleOpenState = () => {
+    isOpen.value = !isOpen.value;
+    collapseSection(isOpen.value);
+  };
 
   return (
     <div class={stl.section} data-greedy={greedy}>
       <SectionTitle>
-        <button
-          type="button"
-          aria-label="Collapse section"
-          onClick={() => {
-            isOpen.value = !isOpen.value;
-          }}
-        >
+        <button type="button" aria-label="Collapse section" onClick={toggleOpenState}>
           <ChevronDownIcon />
         </button>
         {title}

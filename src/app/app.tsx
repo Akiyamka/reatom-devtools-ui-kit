@@ -4,9 +4,9 @@ import { css } from 'vite-css-in-js';
 import { mockEntities } from '#entities';
 import './app.css';
 
-import { ControlsBar } from './ControlsBar';
-import { EventsView } from './views/events';
-import { StateOverviewView } from './views/state_overview';
+import { ControlsBar } from './ControlsBar.tsx';
+import { EventsView } from './views/events/index.ts';
+import { StateOverviewView } from './views/state_overview/index.ts';
 
 const stl = {
   app: css`
